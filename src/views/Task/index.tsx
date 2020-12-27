@@ -1,33 +1,130 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react';
-import { ActivityIndicator, Switch, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Alert, Switch, TouchableOpacity, View } from 'react-native';
 import typeIcons from '../../utils/typeIcons.ts';
 import { ScrollView } from 'react-native-gesture-handler';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import DateTimeInput from '../../components/DateTimeInput';
 
-import { Container, ImageIcon, InLine, InputAreaTask, InputInline, InputTask, Label, RemoveLabel, SwitchLabel } from './styles';
 
-const Task: React.FC = () => {
+import { Container, ImageIcon, InLine, InputAreaTask, InputInline, InputTask, Label, RemoveLabel, SwitchLabel, IconInative } from './styles';
+import { useEffect } from 'react';
+import api from '../../services/api';
 
+interface Navigation {
+  navigation: any
+}
+
+function createTask(data: any) {
+  return function (dispatch: any) {
+    api.post('task', data).then(
+      user => dispatch({ type: 'SUCCESS', payload: data }),
+      err => dispatch({ type: 'ERROR', error: err }),
+    )
+  };
+};
+
+
+function loadTaskRedux(id: any) {
+  return function (dispatch: any) {
+    api.get(`task/${id}`).then(
+      data => dispatch({ type: 'SUCCESS', payload: data.data }),
+      err => dispatch({ type: 'ERROR', error: err }),
+    )
+  };
+};
+
+const Task: React.FC<Navigation> = ({ navigation }) => {
+  const dispatch = useDispatch()
   const [id, setId] = useState();
   const [done, setDone] = useState(false);
-  const [type, setType] = useState();
-  const [title, setTitle] = useState();
-  const [description, setDescription] = useState();
-  const [date, setDate] = useState();
-  const [hour, setHour] = useState();
-  const [macaddress, setMacaddress] = useState();
+  const [type, setType] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [datetime, setDatetime] = useState("");
+  const [hour, setHour] = useState("");
+  const [macaddress, setMacaddress] = useState("");
   const [load, setLoad] = useState(false);
 
-  async function Remove() {}
+  const data = useSelector((store: any) => store.getTaskReducer)
 
-  async function SaveTask(){}
+  async function DeleteTask(){
+    await api.delete(`/task/${id}`).then(() => {
+      navigation.navigate('Home');
+    });
+  }
+
+  async function Remove(){
+    Alert.alert(
+      'Remover Tarefa',
+      'Deseja realmente remover essa tarefa?',
+      [
+        {text: 'Cancelar'},
+        {text: 'Confirmar', onPress: () => DeleteTask()},
+      ],
+      { cancelable: true }
+    )
+  }
+
+  async function SaveTask(){
+
+    if(!title)
+    return Alert.alert('Defina o nome da tarefa!');
+
+    if(!description)
+    return Alert.alert('Defina a descrição da tarefa!');
+
+    if(!type)
+    return Alert.alert('Escolha um tipo para a terafa!');
+
+    if(!datetime)
+    return Alert.alert('Escolha uma data para a terafa!');
+
+    if(!hour)
+    return Alert.alert('Escolha uma hora para a terafa!');
+
+    let data = {
+      macaddress : "11:11:11:11:11:11",
+      type,
+      title,
+      description,
+      when: `${datetime}T${hour}.000`
+    }
+    dispatch(createTask(data))
+  }
+
+
+  function Home(){
+    navigation.navigate('Home');
+  }
+
+  async function LoadTask(){
+    await api.get(`task/${id}`).then(response => {
+      setLoad(true);
+      setDone(response.data.done);
+      setType(response.data.type);
+      setTitle(response.data.title);
+      setDescription(response.data.description);
+      setDatetime(response.data.when);
+      setHour(response.data.when);
+    });
+
+    setLoad(false);
+  }
+
+
+  useEffect(() => {
+    if(navigation.state.params){
+      setId(navigation.state.params.idtask)
+      LoadTask()
+    }
+  }, []);
 
   return (
     <Container>
-      <Header />
+      <Header  onPress={Home}/>
 
       {
         load
@@ -41,7 +138,9 @@ const Task: React.FC = () => {
                 typeIcons.map((icon, index) => (
                   icon != null &&
                   <TouchableOpacity key={index} onPress={() => setType(index)}>
-                    <ImageIcon source={icon} />
+                    {
+                      type != index ? <ImageIcon source={icon} /> : <IconInative source={icon} />
+                    }
                   </TouchableOpacity>
                 ))
               }
@@ -55,7 +154,7 @@ const Task: React.FC = () => {
               value={title}
             />
 
-            <DateTimeInput  type={'date'} save={setDate} date={date}/>
+            <DateTimeInput  type={'date'} save={setDatetime} datetime={datetime}/>
             <DateTimeInput  type={'hour'} save={setHour} hour={hour} />
             
             <Label>Detalhes</Label>
@@ -68,16 +167,9 @@ const Task: React.FC = () => {
               value={description}
             />
 
-            {/* <DateTimeInput type={'date'} save={setDate} date={date} />
-        <DateTimeInput type={'hour'} save={setHour} hour={hour} /> */}
-
             {
               id &&
               <InLine>
-                <InputInline >
-                  <Switch onValueChange={() => setDone(!done)} value={done} thumbColor={done ? '#00761B' : '#EE6B26'} />
-                  <SwitchLabel>Concluído</SwitchLabel>
-                </InputInline>
                 <TouchableOpacity onPress={Remove}>
                   <RemoveLabel>EXCLUÍR</RemoveLabel>
                 </TouchableOpacity>

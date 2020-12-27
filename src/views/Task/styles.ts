@@ -4,7 +4,7 @@ export const Container = styled.KeyboardAvoidingView`
     flex: 1;
     background-color: #FFF;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
 `;
 
 export const Label = styled.Text`
@@ -12,6 +12,9 @@ export const Label = styled.Text`
     font-size: 16px;
     margin-top: 20px;
     margin-bottom: 5px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
 `;
 
 export const SwitchLabel = styled.Text`
@@ -29,7 +32,12 @@ export const RemoveLabel = styled.Text`
     font-size: 16px;
 `;
 
-export const ImageIcon = styled.Image``;
+export const ImageIcon = styled.Image`
+`;
+
+export const IconInative = styled.Image`
+    opacity: 0.5;
+`;
 
 export const InLine = styled.View`
     width: 100%;
@@ -50,6 +58,7 @@ export const InputTask = styled.TextInput`
     font-size: 16px;
     padding: 10px;
     width: 95%;
+    margin-left: 8px;
     border-bottom-width: 1px;
     border-bottom-color: #EE6B26;
 `;
@@ -58,6 +67,7 @@ export const InputAreaTask = styled.TextInput`
     font-size: 16px;
     padding: 10px;
     width: 95%;
+    margin-left: 8px;
     border-width: 1px;
     border-color: #EE6B26;
     border-radius: 10px;

@@ -10,6 +10,7 @@ export const InputTask = styled.TextInput`
       width: 95%;
       border-bottom-width: 1px; 
       border-bottom-color: #EE6B26;
+      margin-left: 8px;
 `;
 
 export const TouchableOpacityDateTime = styled.TouchableOpacity``;

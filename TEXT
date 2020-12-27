@@ -1,0 +1,61 @@
+DESAFIO FRONT-END JAVA SCRIPT
+Esse projeto é projetado para testar o seu conhecimento de tecnologias da internet front-end e avaliar a sua habilidade de criar produtos UI front-end, com atenção aos detalhes, compatibilidade entre navegadores, padrões e capacidade de reutilização.
+
+TAREFA:
+O objetivo desse exercício é criar um aplicativo de calendário de demonstração, utilizando ReactJs ou React Native.
+Você deve iniciar renderizando a visualização de um único mês de um calendário para o mês atual – junto com as linhas de ilustração abaixo:
+
+RECURSOS OBRIGATÓRIOS:
+•	Capacidade de adicionar um novo “lembrete” (com no máximo 30 caracteres) para um dia e hora inseridos pelo usuário. Além disso, inclua uma cidade;
+
+•	Exibição de lembretes na visualização do calendário na ordem de tempo correta;
+
+•	Permita que o usuário selecione cor ao criar um lembrete, e exiba-o apropriadamente;
+
+•	Capacidade de editar lembretes – incluindo mudanças de texto, cidade, dia, hora e cor; 
+
+•	Adicione um serviço meteorológico de uma API gratuita, como Open Weather Map, e obtenha a previsão do tempo (Exemplo: chuva) para a data do lembrete no calendário, baseado na cidade;
+
+TESTE DE UNIDADE A FUNCIONALIDADE:
+
+•	Capacidade de adicionar um novo “lembrete” (com no máximo 30 caracteres) para um dia e hora inseridos pelo usuário. Além disso, inclua uma cidade;
+
+BONUS (OPICIONAL):
+
+•	Expandir o calendário para suportar mais que o mês atual;
+
+•	Lidar adequadamente com a sobrecarga (transbordar informações) quando vários lembretes aparecerem na mesma data;
+
+•	Funcionalidade de excluir um ou todos os lembretes de um dia específico;
+
+
+CONSIDERAÇÕES:
+
+•	Redux (ou qualquer outro gerenciador de estado) como estrutura do calendário;
+
+•	O projeto é completamente focado na parte de front-end. Por favor, ignorar back-end;
+
+•	Mantenha o seu código versionado com Git;
+
+•	Sinta-se à vontade para usar pequenas bibliotecas para: Elementos da interface do usuário / Manipulação de data e hora; 
+
+•	Você mesmo deve criar o componente de calendário. Não use bibliotecas de calendário como FullCalendar ou Bootstrap Calendário;
+
+•	Se você usar uma API externa, certifique-se de fornecer chaves de API funcionais;
+
+ENTREGÁVEIS:
+
+Quando você terminar a tarefa, envie um arquivo zipado (não se esqueça de incluir a pasta .git /.) ou envie seu projeto para o repositório Git (Github, BitBucket, etc ...) e compartilhe o link do repositório com seu contato inicial por e-mail. Indique quais, se houver, das tarefas bônus você concluiu.
+Se não conseguiu terminar tudo, diga-nos quais as partes que concluiu.
+
+Fazer com React Native.
+
+
+
+  LocaleConfig.locales['fr'] = {
+    monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julio', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Desembro'],
+    monthNamesShort: ['Jan.', 'Fev.', 'Mar', 'Març', 'Mai', 'Jun', 'Jul.', 'Ago', 'Set.', 'Out.', 'Nov.', 'Des.'],
+    dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'],
+    dayNamesShort: ['Dom.', 'Seg.', 'Ter.', 'Qua.', 'Qui.', 'Sex.', 'Sab.'],
+  };
+  LocaleConfig.defaultLocale = 'fr';

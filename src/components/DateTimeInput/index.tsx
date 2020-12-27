@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Button, View, Platform } from 'react-native';
+import { format, isPast } from 'date-fns';
 import { Container, InputTask, TouchableOpacityDateTime, IconTextInput } from './styles';
 import iconCalendar from '../../assets/calendar.png';
 import iconClock from '../../assets/clock.png';
@@ -8,20 +9,21 @@ import iconClock from '../../assets/clock.png';
 interface DateTimeTypes {
   type: string
   save?: any
-  date?: any
+  datetime?: any
   hour?: any
 }
 
-const DateTimeInput: React.FC<DateTimeTypes> = ({ type, save, hour, date }) => {
-  const [dateDateTime, setDateDateTime] = useState(new Date(1598051730000));
+const DateTimeInput: React.FC<DateTimeTypes> = ({ type, save, datetime, hour }) => {
+  const [date, setDate] = useState(new Date(1598051730000));
   const [mode, setMode] = useState('date');
-  const [datetime, setDateTime] = useState();
   const [show, setShow] = useState(false);
+  const [valueComponent, setValueComponent] = useState("")
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
-    setDateDateTime(currentDate);
+    setDate(currentDate);
+
   };
 
   const showMode = (currentMode) => {
@@ -37,6 +39,17 @@ const DateTimeInput: React.FC<DateTimeTypes> = ({ type, save, hour, date }) => {
     showMode('time');
   };
 
+  useEffect(() => {
+    if(type == 'date' && date){
+      setValueComponent(format(new Date(date), 'dd/MM/yyyy'));
+      save(format(new Date(date), 'yyyy-MM-dd'));
+    }
+
+    if(type == 'hour' && date){
+      setValueComponent(format(new Date(date), 'HH:mm'));
+      save(format(new Date(date), 'HH:mm:ss'));
+    }
+  },[date])
   return (
     <Container>
       <View>
@@ -44,7 +57,7 @@ const DateTimeInput: React.FC<DateTimeTypes> = ({ type, save, hour, date }) => {
           <InputTask
             placeholder={type == 'date' ? 'Clique aqui para definir a data...' : 'Clique aqui para definir a hora...'}
             editable={false}
-            value={datetime}
+            value={valueComponent}
           />
           <IconTextInput source={type == 'date' ? iconCalendar : iconClock} />
         </TouchableOpacityDateTime>
