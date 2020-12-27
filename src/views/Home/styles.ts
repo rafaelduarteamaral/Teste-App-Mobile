@@ -12,6 +12,7 @@ export const Filter = styled.View`
     justify-content: space-around;
     height: 70px;
     align-items: center;
+    margin-top: 35%;
 `;
 
 export const SetFilter = styled.TouchableOpacity``;
@@ -29,6 +30,26 @@ export const FilterTextInative = styled.Text`
     opacity: 0.5;
 `;
 
-export const Title = styled.Text``;
+export const Title = styled.Text`
+    width: 100%;
+    border-bottom-width: 1px;
+    border-color: #20295f;
+    align-items: center;
+    justify-content: center;
+`;
 
-export const TitleText = styled.Text``;
+export const TitleText = styled.Text`
+    color: #20295f;
+    font-size: 18px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: 11px;
+    background-color: #FFF;
+`;
+
+export const Content = styled.ScrollView`
+    width: 100%;
+    margin-top: 30px;
+`;

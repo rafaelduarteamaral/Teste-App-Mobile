@@ -9,13 +9,15 @@ import { Container, Logo, Notification, NotificationImage, Circle, NotificationT
 import { TouchableOpacity } from 'react-native';
 import api from '../../services/api';
 import { useState } from 'react';
+import { SetFilter } from '../../views/Home/styles';
 
 interface Navigation {
   onPress: any
   filter?: any
+  pressNotification?: any
 }
 
-const Header: React.FC<Navigation> = ({onPress, filter}) => {
+const Header: React.FC<Navigation> = ({onPress, filter, pressNotification}) => {
   
   const [load, setLoad] = useState(false);
   const [lateCount, setLateCount] = useState(0);
@@ -30,16 +32,11 @@ const Header: React.FC<Navigation> = ({onPress, filter}) => {
   }
 
   async function lateVerify(){
-    await api.get(`/task/filter/all/11:11:11:11:11:11`)
+    await api.get(`/task/filter/late/11:11:11:11:11:11`)
     .then(response => {
       setLateCount(response.data.length)      
     });
   }
-
-
-  // function Notification(){
-  //   setFilter('late');
-  // }
 
   useEffect(() => {
     lateVerify();
@@ -54,10 +51,10 @@ const Header: React.FC<Navigation> = ({onPress, filter}) => {
       <TouchableOpacity onPress={onPress}>
         <Logo source={logo}/>
       </TouchableOpacity>
-      <Notification >
+      <Notification onPress={pressNotification}>
           <NotificationImage source={bell} />
           <Circle>
-            <NotificationText>{lateCount > 0 && lateCount}</NotificationText>
+            <NotificationText>{lateCount}</NotificationText>
           </Circle>
       </Notification>
     </Container>

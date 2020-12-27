@@ -51,11 +51,6 @@ Se não conseguiu terminar tudo, diga-nos quais as partes que concluiu.
 Fazer com React Native.
 
 
-
-  LocaleConfig.locales['fr'] = {
-    monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julio', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Desembro'],
-    monthNamesShort: ['Jan.', 'Fev.', 'Mar', 'Març', 'Mai', 'Jun', 'Jul.', 'Ago', 'Set.', 'Out.', 'Nov.', 'Des.'],
-    dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'],
-    dayNamesShort: ['Dom.', 'Seg.', 'Ter.', 'Qua.', 'Qui.', 'Sex.', 'Sab.'],
-  };
-  LocaleConfig.defaultLocale = 'fr';
+#*API PARA BUSCAR O CLIMA*#
+https://advisor.climatempo.com.br/home/#!/tokens
+** TOKENS: 61e3e25bb64931a0c32849c299171ccb

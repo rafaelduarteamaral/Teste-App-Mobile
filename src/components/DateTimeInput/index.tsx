@@ -14,7 +14,7 @@ interface DateTimeTypes {
 }
 
 const DateTimeInput: React.FC<DateTimeTypes> = ({ type, save, datetime, hour }) => {
-  const [date, setDate] = useState(new Date(1598051730000));
+  const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
   const [valueComponent, setValueComponent] = useState("")
@@ -40,15 +40,29 @@ const DateTimeInput: React.FC<DateTimeTypes> = ({ type, save, datetime, hour }) 
   };
 
   useEffect(() => {
-    if(type == 'date' && date){
-      setValueComponent(format(new Date(date), 'dd/MM/yyyy'));
-      save(format(new Date(date), 'yyyy-MM-dd'));
-    }
 
-    if(type == 'hour' && date){
-      setValueComponent(format(new Date(date), 'HH:mm'));
-      save(format(new Date(date), 'HH:mm:ss'));
+    if(datetime) {
+      if(type == 'date'){
+        setValueComponent(format(new Date(datetime), 'dd/MM/yyyy'));
+        save(format(new Date(date), 'yyyy-MM-dd'));
+      }
+  
+      if(type == 'hour'){
+        setValueComponent(format(new Date(datetime), 'HH:mm'));
+        save(format(new Date(date), 'HH:mm:ss'));
+      }
+    } else {
+      if(type == 'date' && date){
+        setValueComponent(format(new Date(date), 'dd/MM/yyyy'));
+        save(format(new Date(date), 'yyyy-MM-dd'));
+      }
+  
+      if(type == 'hour' && date){
+        setValueComponent(format(new Date(date), 'HH:mm'));
+        save(format(new Date(date), 'HH:mm:ss'));
+      }
     }
+    
   },[date])
   return (
     <Container>

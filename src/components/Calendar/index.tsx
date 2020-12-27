@@ -46,6 +46,7 @@ const Calendar: React.FC = () => {
             var rowItems = row.map((item, colIndex) => {
               return (
                 <Text
+                  key={colIndex}
                   style={{
                     flex: 1,
                     height: 18,
@@ -53,7 +54,7 @@ const Calendar: React.FC = () => {
                     backgroundColor: rowIndex == 0 ? '#ddd' : '#fff',
                     color: colIndex == 0 ? '#a00' : '#000',
                     fontWeight: item == activeDate.getDate()
-                      ? 'bold' : ''
+                      ? 'bold' : 'normal'
                   }}
                   onPress={() => getDay(item)}>
                   {item != -1 ? item : ''}
@@ -62,6 +63,7 @@ const Calendar: React.FC = () => {
             });
             return (
               <View
+                key={rowIndex}
                 style={{
                   flex: 1,
                   flexDirection: 'row',
@@ -87,7 +89,7 @@ const Calendar: React.FC = () => {
                     backgroundColor: rowIndex == 0 ? '#ddd' : '#fff',
                     color: colIndex == 0 ? '#a00' : '#000',
                     fontWeight: item == activeDate.getDate()
-                      ? 'bold' : ''
+                      ? 'bold' : 'normal'
                   }}
                   onPress={() => getDay(item)}>
                   {item != -1 ? item : ''}

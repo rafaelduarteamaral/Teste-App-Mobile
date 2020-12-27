@@ -3,7 +3,7 @@ import { ActivityIndicator, ScrollView, Text, TouchableOpacity } from 'react-nat
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import Calendar from '../../components/Calendar';
-import { Container, Filter, FilterTextActived, FilterTextInative } from './styles';
+import { Container, Content, Filter, FilterTextActived, FilterTextInative, Title, TitleText } from './styles';
 import { useState } from 'react';
 import TaskCard from '../../components/TaskCard';
 import api from '../../services/api';
@@ -60,6 +60,10 @@ const Home: React.FC<Navigation> = ({ navigation }) => {
       });
   }
 
+  function Notification() {
+    setFilter('late');
+  }
+
   useEffect(() => {
     loadTasks();
     lateVerify();
@@ -67,11 +71,8 @@ const Home: React.FC<Navigation> = ({ navigation }) => {
 
   return (
     <Container>
-      <Header onPress={Home} />
-
-            <Calendar />
-
-
+      <Header onPress={Home} pressNotification={Notification} />
+      <Calendar />
       <Filter>
         <TouchableOpacity onPress={() => setFilter('all')}>
           {true ? <FilterTextActived>Todos</FilterTextActived> : <FilterTextInative>Todos</FilterTextInative>}
@@ -93,7 +94,10 @@ const Home: React.FC<Navigation> = ({ navigation }) => {
           {true ? <FilterTextActived>Ano</FilterTextActived> : <FilterTextInative>Ano</FilterTextInative>}
         </TouchableOpacity>
       </Filter>
-      <ScrollView contentContainerStyle={{ alignItems: 'center', width: "100%"}}>
+
+      <TitleText>TAREFAS {filter == 'late' && ' ATRASADAS'}</TitleText>
+
+      <Content contentContainerStyle={{ alignItems: 'center', width: "100%" }}>
         {
           load
             ?
@@ -110,7 +114,7 @@ const Home: React.FC<Navigation> = ({ navigation }) => {
               />
             ))
         }
-      </ScrollView>
+      </Content>
 
       <Footer icon={'add'} onPress={New} />
     </Container>

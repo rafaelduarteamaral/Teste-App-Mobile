@@ -14,7 +14,7 @@ const Footer: React.FC<FooterInterface> = ({ icon, onPress }) => {
   return (
     <Container>
       <ButtonFooter onPress={onPress}>
-        <ImageFooter source={add} />
+        <ImageFooter source={icon == "add" ? add: save} />
       </ButtonFooter>
       <TextFooter>
         Organizando sua vida

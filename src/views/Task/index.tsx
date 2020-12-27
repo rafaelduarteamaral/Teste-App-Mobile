@@ -12,6 +12,7 @@ import DateTimeInput from '../../components/DateTimeInput';
 import { Container, ImageIcon, InLine, InputAreaTask, InputInline, InputTask, Label, RemoveLabel, SwitchLabel, IconInative } from './styles';
 import { useEffect } from 'react';
 import api from '../../services/api';
+import GeoClimate from '../../components/GeoClimate';
 
 interface Navigation {
   navigation: any
@@ -20,12 +21,20 @@ interface Navigation {
 function createTask(data: any) {
   return function (dispatch: any) {
     api.post('task', data).then(
-      user => dispatch({ type: 'SUCCESS', payload: data }),
+      int => dispatch({ type: 'SUCCESS', payload: data }),
       err => dispatch({ type: 'ERROR', error: err }),
     )
   };
 };
 
+function updateTask(data: any, id: any) {
+  return function (dispatch: any) {
+    api.put(`task/${id}`, data).then(
+      int => dispatch({ type: 'SUCCESS', payload: data }),
+      err => dispatch({ type: 'ERROR', error: err }),
+    )
+  };
+};
 
 function loadTaskRedux(id: any) {
   return function (dispatch: any) {
@@ -45,6 +54,9 @@ const Task: React.FC<Navigation> = ({ navigation }) => {
   const [description, setDescription] = useState("");
   const [datetime, setDatetime] = useState("");
   const [hour, setHour] = useState("");
+  const [clima, setClima] = useState("");
+  const [cidade, setCidade] = useState("");
+
   const [macaddress, setMacaddress] = useState("");
   const [load, setLoad] = useState(false);
 
@@ -92,7 +104,13 @@ const Task: React.FC<Navigation> = ({ navigation }) => {
       description,
       when: `${datetime}T${hour}.000`
     }
-    dispatch(createTask(data))
+
+    if(id) {
+      dispatch(updateTask(data, id))
+    } else {
+      dispatch(createTask(data))
+    }
+    
   }
 
 
@@ -100,12 +118,13 @@ const Task: React.FC<Navigation> = ({ navigation }) => {
     navigation.navigate('Home');
   }
 
-  async function LoadTask(){
-    await api.get(`task/${id}`).then(response => {
+  async function LoadTask(ids){
+    await api.get(`task/${ids}`).then(response => {
       setLoad(true);
       setDone(response.data.done);
       setType(response.data.type);
       setTitle(response.data.title);
+      setCidade(response.data.cidade);
       setDescription(response.data.description);
       setDatetime(response.data.when);
       setHour(response.data.when);
@@ -118,14 +137,13 @@ const Task: React.FC<Navigation> = ({ navigation }) => {
   useEffect(() => {
     if(navigation.state.params){
       setId(navigation.state.params.idtask)
-      LoadTask()
+      LoadTask(navigation.state.params.idtask)
     }
   }, []);
 
   return (
     <Container>
       <Header  onPress={Home}/>
-
       {
         load
           ?
@@ -157,6 +175,9 @@ const Task: React.FC<Navigation> = ({ navigation }) => {
             <DateTimeInput  type={'date'} save={setDatetime} datetime={datetime}/>
             <DateTimeInput  type={'hour'} save={setHour} hour={hour} />
             
+            <Label>Cidade</Label>
+            {/* <GeoClimate save={setCidade}  cidade={cidade}/> */}
+
             <Label>Detalhes</Label>
             
             <InputAreaTask

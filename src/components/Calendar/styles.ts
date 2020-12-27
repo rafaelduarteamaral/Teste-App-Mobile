@@ -3,10 +3,10 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
     flex: 1;
     width: 100%;
-    padding-bottom: 50%;
     padding-top: 3%;
     align-items: center;
     justify-content: flex-start; 
+    align-items: center;
 `;
 
 export const Title = styled.View`
@@ -37,6 +37,7 @@ export const TextCalendar = styled.Text`
 
 
 export const TextTitle = styled.Text`
+    font-weight: bold;
     font-size: 18px;
     text-align: center;
 
