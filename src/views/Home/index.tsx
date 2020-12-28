@@ -110,6 +110,7 @@ const Home: React.FC<Navigation> = ({ navigation }) => {
                 title={t.title}
                 when={t.when}
                 type={t.type}
+                cidade={t.cidade}
                 onPress={() => Show(t._id)}
               />
             ))

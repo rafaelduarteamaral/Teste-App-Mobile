@@ -97,10 +97,14 @@ const Task: React.FC<Navigation> = ({ navigation }) => {
     if(!hour)
     return Alert.alert('Escolha uma hora para a terafa!');
 
+    if(!cidade)
+    return Alert.alert('Escolha uma cidade para a terafa!');
+
     let data = {
       macaddress : "11:11:11:11:11:11",
       type,
       title,
+      cidade,
       description,
       when: `${datetime}T${hour}.000`
     }
@@ -175,8 +179,8 @@ const Task: React.FC<Navigation> = ({ navigation }) => {
             <DateTimeInput  type={'date'} save={setDatetime} datetime={datetime}/>
             <DateTimeInput  type={'hour'} save={setHour} hour={hour} />
             
-            {/* <Label>Cidade</Label>
-            <GeoClimate save={setCidade}  cidade={cidade}/> */}
+            <Label>Cidade</Label>
+            <GeoClimate save={setCidade}  cidade={cidade}/>
 
             <Label>Detalhes</Label>
             

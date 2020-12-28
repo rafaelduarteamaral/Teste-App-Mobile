@@ -8,10 +8,11 @@ interface CardTask {
   title: any
   when: any
   type: any
+  cidade: any
   onPress: any
 }
 
-const TaskCard: React.FC<CardTask> = ({ done, title, when, type, onPress }) => {
+const TaskCard: React.FC<CardTask> = ({ done, title, when, type, cidade,onPress }) => {
   return (
     <Container  onPress={onPress}>
       <CardLeft>
@@ -19,7 +20,7 @@ const TaskCard: React.FC<CardTask> = ({ done, title, when, type, onPress }) => {
         <CardTitle>{title}</CardTitle>
       </CardLeft>
       <CardRight>
-        <CardDate>{format(new Date(when), 'dd/MM/yyyy')}</CardDate>
+        <CardDate>{format(new Date(when), 'dd/MM/yyyy')} {cidade}</CardDate>
         <CardTime>{format(new Date(when), 'HH:mm')}</CardTime>
       </CardRight>
     </Container>

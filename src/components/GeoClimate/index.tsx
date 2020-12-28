@@ -23,18 +23,18 @@ const GeoClimate: React.FC<Clima> = ({ save, cidade }) => {
 
 
   async function loadClimate() {
-    let data = cidade.split('-')
-    await api.get(`https://apiadvisor.climatempo.com.br/api/v1/locale/city?name=${data[1]}&state=${data[0]}&token=c1cdba8979fd4fb41bf76d03b1d04eb9`)
-      .then(response => {
-        getTempo(response.data[0].id)
-      });
+    // let data = cidade.split('-')
+    // await api.get(`https://apiadvisor.climatempo.com.br/api/v1/locale/city?name=${data[1]}&state=${data[0]}&token=c1cdba8979fd4fb41bf76d03b1d04eb9`)
+    //   .then(response => {
+    //     getTempo(response.data[0].id)
+    //   });
   }
 
   async function getTempo(id: any) {
-    await api.get(`https://apiadvisor.climatempo.com.br/api/v1/weather/locale/${id}/current?token=c1cdba8979fd4fb41bf76d03b1d04eb9`)
-    .then(response => {
-      console.log(response)
-    });
+    // await api.get(`https://apiadvisor.climatempo.com.br/api/v1/weather/locale/${id}/current?token=c1cdba8979fd4fb41bf76d03b1d04eb9`)
+    // .then(response => {
+    //   console.log(response)
+    // });
   }
 
 
