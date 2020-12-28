@@ -175,8 +175,8 @@ const Task: React.FC<Navigation> = ({ navigation }) => {
             <DateTimeInput  type={'date'} save={setDatetime} datetime={datetime}/>
             <DateTimeInput  type={'hour'} save={setHour} hour={hour} />
             
-            <Label>Cidade</Label>
-            {/* <GeoClimate save={setCidade}  cidade={cidade}/> */}
+            {/* <Label>Cidade</Label>
+            <GeoClimate save={setCidade}  cidade={cidade}/> */}
 
             <Label>Detalhes</Label>
             
