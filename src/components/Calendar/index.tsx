@@ -52,7 +52,7 @@ const Calendar: React.FC = () => {
                     height: 18,
                     textAlign: 'center',
                     backgroundColor: rowIndex == 0 ? '#ddd' : '#fff',
-                    color: colIndex == 0 ? '#a00' : '#000',
+                    color: colIndex == 0 ? '#EE6B26' : '#202020',
                     fontWeight: item == activeDate.getDate()
                       ? 'bold' : 'normal'
                   }}
@@ -87,7 +87,7 @@ const Calendar: React.FC = () => {
                     height: 18,
                     textAlign: 'center',
                     backgroundColor: rowIndex == 0 ? '#ddd' : '#fff',
-                    color: colIndex == 0 ? '#a00' : '#000',
+                    color: colIndex == 0 ? '#EE6B26' : '#202020',
                     fontWeight: item == activeDate.getDate()
                       ? 'bold' : 'normal'
                   }}
