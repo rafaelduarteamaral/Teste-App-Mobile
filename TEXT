@@ -52,5 +52,5 @@ Fazer com React Native.
 
 
 #*API PARA BUSCAR O CLIMA*#
-https://advisor.climatempo.com.br/home/#!/tokens
-** TOKENS: 61e3e25bb64931a0c32849c299171ccb
+http://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=deb65f7a40c8141a9e32ecb4a42092db
+** TOKENS: deb65f7a40c8141a9e32ecb4a42092db
