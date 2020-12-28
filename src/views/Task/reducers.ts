@@ -1,3 +1,5 @@
+import { Alert } from "react-native"
+
 const INITIAL_STATE = {
     'count': 1
 }
@@ -6,10 +8,10 @@ const INITIAL_STATE = {
 export default function reducer(state=INITIAL_STATE, action: any) {
   switch (action.type) {
     case 'SUCCESS':
-        alert("Sucesso!")
+        Alert.alert("Sucesso!")
         return {...state, ...action.payload}
     case 'ERROR':
-        alert("Error!")
+        Alert.alert("Error!")
        return {...state}
     default:
       return state;
